@@ -2,7 +2,6 @@
 
 import { useToast } from "@/hooks/use-toast";
 import config from "@/lib/config";
-import { cn } from "@/lib/utils";
 import { IKImage, IKUpload, ImageKitProvider } from "imagekitio-next";
 import Image from "next/image";
 import React, { useRef, useState } from "react";
@@ -41,8 +40,8 @@ const ImageUpload = ({
     console.log(error);
     toast({
       title: "Image upload failed",
-      description: 'Your image could not be uploaded, please try again',
-      variant: 'destructive'
+      description: "Your image could not be uploaded, please try again",
+      variant: "destructive",
     });
   };
   const onSuccess = (res: any) => {
@@ -50,10 +49,9 @@ const ImageUpload = ({
     onFileChange(res.filePath);
 
     toast({
-        title: "Image uploaded successfully",
-        description: `${res.filePath} uploaded successfully`,
-      });
-  
+      title: "Image uploaded successfully",
+      description: `${res.filePath} uploaded successfully`,
+    });
   };
 
   return (
@@ -76,7 +74,7 @@ const ImageUpload = ({
           e.preventDefault();
 
           if (ikUploadRef.current) {
-            // @ts-ignore
+            // @ts-expect-error 123
             ikUploadRef.current?.click();
           }
         }}
