@@ -20,8 +20,9 @@ export const sendEmail = async ({
   message: string;
   to_email: string;
 }) => {
-  await emailjs
+  emailjs
     .send(config.env.emailjs.serviceId, config.env.emailjs.templateId, {
+      user_id: config.env.emailjs.publicKey,
       subject,
       from_name,
       to_name,
@@ -33,7 +34,7 @@ export const sendEmail = async ({
         console.log("Success");
       },
       (error) => {
-        console.log("Error! ", error.text);
+        console.log("Error on API call! ", error.text);
       }
     );
 };
