@@ -26,7 +26,7 @@ export const sendEmail = async ({
   try {
     const response = await sendgrid.send({
       to: to_email,
-      from: `${from_name} <sergijba@gmail.com>`,
+      from: `${from_name} <sergijba@sendgrid.net>`,
       subject,
       text: message,
       html: message,
@@ -34,10 +34,7 @@ export const sendEmail = async ({
 
     console.log("Email sent successfully", response);
   } catch (error) {
-    console.log(
-      `Error on API call! Api key - ${config.env.sendGrid.apiKey} `,
-      error
-    );
+    console.log(`Error on API call! ${error}`);
 
     if (error instanceof Error) {
       console.error("Erorr details:", error.message);
