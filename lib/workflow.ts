@@ -26,7 +26,7 @@ export const sendEmail = async ({
   try {
     const response = await sendgrid.send({
       to: to_email,
-      from: `${from_name} <sergijba@sendgrid.net>`,
+      from: `${from_name} <sergijba@gmail.com>`,
       subject,
       text: message,
       html: message,
