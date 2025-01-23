@@ -1,6 +1,9 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { Client as WorkflowClient } from "@upstash/workflow";
 import config from "./config";
-import emailjs from "@emailjs/browser";
+import sendgrid from "@sendgrid/mail";
+
+sendgrid.setApiKey(config.env.sendGrid.apiKey);
 
 export const workflowClient = new WorkflowClient({
   baseUrl: config.env.upstash.qstashUrl,
@@ -21,18 +24,13 @@ export const sendEmail = async ({
   to_email: string;
 }) => {
   try {
-    const response = await emailjs.send(
-      config.env.emailjs.serviceId,
-      config.env.emailjs.templateId,
-      {
-        subject,
-        from_name,
-        to_name,
-        message,
-        to_email,
-      },
-      config.env.emailjs.publicKey
-    );
+    const response = await sendgrid.send({
+      to: to_email,
+      from: `${from_name} <sergijba@gmail.com>`,
+      subject,
+      text: message,
+      html: message,
+    });
 
     console.log("Email sent successfully", response);
   } catch (error) {
