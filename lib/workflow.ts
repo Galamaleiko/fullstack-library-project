@@ -34,7 +34,10 @@ export const sendEmail = async ({
 
     console.log("Email sent successfully", response);
   } catch (error) {
-    console.log("Error on API call! ", error);
+    console.log(
+      `Error on API call! Api key - ${config.env.sendGrid.apiKey} `,
+      error
+    );
 
     if (error instanceof Error) {
       console.error("Erorr details:", error.message);
