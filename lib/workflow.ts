@@ -21,14 +21,18 @@ export const sendEmail = async ({
   to_email: string;
 }) => {
   emailjs
-    .send(config.env.emailjs.serviceId, config.env.emailjs.templateId, {
-      user_id: config.env.emailjs.publicKey,
-      subject,
-      from_name,
-      to_name,
-      message,
-      to_email,
-    })
+    .send(
+      config.env.emailjs.serviceId,
+      config.env.emailjs.templateId,
+      {
+        subject,
+        from_name,
+        to_name,
+        message,
+        to_email,
+      },
+      config.env.emailjs.publicKey
+    )
     .then(
       () => {
         console.log("Success");
